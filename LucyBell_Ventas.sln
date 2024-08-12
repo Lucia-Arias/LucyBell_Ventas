@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35013.160
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LucyBell_Ventas.Server", "LucyBell_Ventas.Server\LucyBell_Ventas.Server.csproj", "{8A2A4122-14E8-4F3E-8EB3-090A28D2A2A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LucyBell_Ventas.BD", "LucyBell_Ventas.BD\LucyBell_Ventas.BD.csproj", "{11A991BB-0678-4C64-8C50-BC1D2D82CA17}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8A2A4122-14E8-4F3E-8EB3-090A28D2A2A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A2A4122-14E8-4F3E-8EB3-090A28D2A2A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A2A4122-14E8-4F3E-8EB3-090A28D2A2A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A2A4122-14E8-4F3E-8EB3-090A28D2A2A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11A991BB-0678-4C64-8C50-BC1D2D82CA17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11A991BB-0678-4C64-8C50-BC1D2D82CA17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11A991BB-0678-4C64-8C50-BC1D2D82CA17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11A991BB-0678-4C64-8C50-BC1D2D82CA17}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AA7E1157-8E80-4327-8562-A0E9AE91D3D9}
+	EndGlobalSection
+EndGlobal

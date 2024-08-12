@@ -1,0 +1,6 @@
+@LucyBell_Ventas.Server_HostAddress = http://localhost:5104
+
+GET {{LucyBell_Ventas.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
