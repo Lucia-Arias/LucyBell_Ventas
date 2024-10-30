@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LucyBell_Ventas.Server", "LucyBell_Ventas.Server\LucyBell_Ventas.Server.csproj", "{8A2A4122-14E8-4F3E-8EB3-090A28D2A2A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LucyBell_Ventas.Server", "LucyBell_Ventas.Server\LucyBell_Ventas.Server.csproj", "{8A2A4122-14E8-4F3E-8EB3-090A28D2A2A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LucyBell_Ventas.BD", "LucyBell_Ventas.BD\LucyBell_Ventas.BD.csproj", "{11A991BB-0678-4C64-8C50-BC1D2D82CA17}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LucyBell_Ventas.BD", "LucyBell_Ventas.BD\LucyBell_Ventas.BD.csproj", "{11A991BB-0678-4C64-8C50-BC1D2D82CA17}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LucyBell_Ventas.Shared", "LucyBell_Ventas.Shared\LucyBell_Ventas.Shared.csproj", "{210B837D-5730-41FB-A8F1-CAB4D0E1DABD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{11A991BB-0678-4C64-8C50-BC1D2D82CA17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11A991BB-0678-4C64-8C50-BC1D2D82CA17}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11A991BB-0678-4C64-8C50-BC1D2D82CA17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{210B837D-5730-41FB-A8F1-CAB4D0E1DABD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{210B837D-5730-41FB-A8F1-CAB4D0E1DABD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{210B837D-5730-41FB-A8F1-CAB4D0E1DABD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{210B837D-5730-41FB-A8F1-CAB4D0E1DABD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

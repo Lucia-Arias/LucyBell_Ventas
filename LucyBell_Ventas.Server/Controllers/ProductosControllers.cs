@@ -2,6 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using LucyBell_Ventas.BD.Data;
 using LucyBell_Ventas.BD.Data.Entity;
+using LucyBell_Ventas.Shared.DTO;
+using AutoMapper;
+using LucyBell_Ventas.Server.Repositorio;
 
 namespace LucyBell_Ventas.Server.Controllers
 {
@@ -9,27 +12,23 @@ namespace LucyBell_Ventas.Server.Controllers
     [Route("Api/Productos")]
     public class ProductosControllers : ControllerBase
     {
-        private readonly Context context;
+        private readonly IProductoRepositorio repositorio;
+        private readonly IMapper mapper;
 
-        public ProductosControllers(Context context)
+        public ProductosControllers(IProductoRepositorio repositorio,IMapper mapper)
         {
-            this.context = context;
-        }
-        [HttpGet]
-
-        public async Task<ActionResult<List<Producto>>> Get()
-        {
-            return await context.productos.ToListAsync();
+            this.repositorio = repositorio;
+            this.mapper = mapper;
         }
 
         [HttpPost]
-        public async Task<ActionResult<int>> Post(Producto entidad)
+        public async Task<ActionResult<int>> Post(CrearProductoDTO entidadDTO)
         {
             try
             {
-                context.productos.Add(entidad);
-                await context.SaveChangesAsync();
-                return entidad.Id;
+                Producto entidad = mapper.Map<Producto>(entidadDTO);
+
+                return await repositorio.Insert(entidad);
             }
             catch (Exception e)
             {
@@ -37,38 +36,5 @@ namespace LucyBell_Ventas.Server.Controllers
             }
         }
 
-        [HttpPut("{id:int}")]
-        public async Task<ActionResult> Put(int id, [FromBody] Producto entidad)
-        {
-
-            if (id != entidad.Id)
-            {
-                return BadRequest("Datos incorrectos.");
-            }
-
-            var verif = await context.productos.Where(e => e.Id == id).FirstOrDefaultAsync();
-
-            if (verif == null)
-            {
-                return NotFound("No existe la obra buscada.");
-            }
-
-            verif.Nombre = entidad.Nombre;
-            verif.Precio = entidad.Precio;
-            verif.Stock = entidad.Stock;
-
-            try
-            {
-                context.productos.Update(verif);
-                await context.SaveChangesAsync();
-                return Ok();
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-
-        }
     }
 }
