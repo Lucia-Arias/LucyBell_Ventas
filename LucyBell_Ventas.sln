@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LucyBell_Ventas.Server", "L
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LucyBell_Ventas.BD", "LucyBell_Ventas.BD\LucyBell_Ventas.BD.csproj", "{11A991BB-0678-4C64-8C50-BC1D2D82CA17}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LucyBell_Ventas.Shared", "LucyBell_Ventas.Shared\LucyBell_Ventas.Shared.csproj", "{210B837D-5730-41FB-A8F1-CAB4D0E1DABD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LucyBell_Ventas.Shared", "LucyBell_Ventas.Shared\LucyBell_Ventas.Shared.csproj", "{210B837D-5730-41FB-A8F1-CAB4D0E1DABD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LucyBell_Ventas.Client", "LucyBell_Ventas.Client\LucyBell_Ventas.Client.csproj", "{CB6AA916-2CDF-4F05-B6A5-66A8056D56F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{210B837D-5730-41FB-A8F1-CAB4D0E1DABD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{210B837D-5730-41FB-A8F1-CAB4D0E1DABD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{210B837D-5730-41FB-A8F1-CAB4D0E1DABD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CB6AA916-2CDF-4F05-B6A5-66A8056D56F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB6AA916-2CDF-4F05-B6A5-66A8056D56F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB6AA916-2CDF-4F05-B6A5-66A8056D56F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB6AA916-2CDF-4F05-B6A5-66A8056D56F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

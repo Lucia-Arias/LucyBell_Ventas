@@ -5,9 +5,10 @@ namespace LucyBell_Ventas.Server.Repositorio
 {
     public class ProductoRepositorio : Repositorio<Producto>, IProductoRepositorio
     {
-        public ProductoRepositorio(Context contex) : base(contex)
+        private readonly Context context;
+        public ProductoRepositorio(Context context) : base(context)
         {
-            
+            this.context = context;
         }
 
 
