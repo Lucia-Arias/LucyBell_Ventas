@@ -1,0 +1,61 @@
+﻿@page "/Api/Productos/agregar" 
+@inject IHttpServicio http
+@inject NavigationManager navigationManager
+
+<h3>Agregar Producto</h3>
+
+<EditForm Model = "producto" OnInvalidSubmit="Guardar"> 
+	<DataAnnotationsValidator />
+
+	<div class = "form-grup">
+		<label> Nombre </label>
+		<div>
+			<InputText class = "form-control" @brind-Value="@producto.Nombre" /> 
+			<ValidationMessage For = "@(() => producto.Nombre)" /> 
+		</div>
+	</div>
+
+	<div class = "form-grup">
+		<label> Precio </label>
+		<div>
+			<InputText class = "form-control" @brind-Value="@producto.Precio" /> 
+			<ValidationMessage For = "@(() => producto.Precio)" /> 
+		</div>
+	</div>
+
+	<div class = "form-grup">
+		<label> Stock </label>
+		<div>
+			<InputText class = "form-control" @brind-Value="@producto.Stock" /> 
+			<ValidationMessage For = "@(() => producto.Stock)" /> 
+		</div>
+	</div>
+
+	<br/>
+	<button class = "btn btn-success" type = "submit">Aceptar</button>
+	<button class = "btn btn-danger" @onclick = "Cancelar">Cancelar</button>
+
+</EditForm>
+
+
+@code {
+	private Producto producto = new Producto();
+
+	private async Task Guardar()
+	{
+		var HttpRespuesta = await http.Post<Producto>("Api/Productos", producto);
+
+		if (HttpRespuesta.Error)
+		{
+			var body = HttpRespuesta.HttpResponseMessage;
+		}
+
+		//navigationManager.NavigateTo("/Api/Productos");
+
+	}
+
+	private void Cancelar()
+	{
+		navigationManager.NavigateTo("/Api/Productos");
+	}
+}

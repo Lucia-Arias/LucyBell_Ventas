@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LucyBell_Ventas.BD", "LucyB
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LucyBell_Ventas.Shared", "LucyBell_Ventas.Shared\LucyBell_Ventas.Shared.csproj", "{210B837D-5730-41FB-A8F1-CAB4D0E1DABD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LucyBell_Ventas.Client", "LucyBell_Ventas.Client\LucyBell_Ventas.Client.csproj", "{CB6AA916-2CDF-4F05-B6A5-66A8056D56F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LucyBell_Ventas.Client", "LucyBell_Ventas.Client\LucyBell_Ventas.Client.csproj", "{CB6AA916-2CDF-4F05-B6A5-66A8056D56F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
