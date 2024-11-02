@@ -21,7 +21,13 @@ namespace LucyBell_Ventas.Server.Controllers
             this.mapper = mapper;
         }
 
-        [HttpPost]
+		[HttpGet]
+		public async Task<ActionResult<List<Producto>>> Get()
+		{
+			return await repositorio.Select();
+		}
+
+		[HttpPost]
         public async Task<ActionResult<int>> Post(CrearProductoDTO entidadDTO)
         {
             try

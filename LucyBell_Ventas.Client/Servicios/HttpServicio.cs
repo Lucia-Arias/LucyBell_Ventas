@@ -12,21 +12,21 @@ namespace LucyBell_Ventas.Client.Servicios
             this.http = http;
         }
 
-        //public async Task<HttpRespuesta<T>> Get<T>(string url)
-        //{
-        //    var response = await http.GetAsync(url);
+        public async Task<HttpRespuesta<T>> Get<T>(string url)
+        {
+            var response = await http.GetAsync(url);
 
-        //    if (response.IsSuccessStatusCode)
-        //    {
-        //        var respuesta = await DesSerializar<T> (response);
+            if (response.IsSuccessStatusCode)
+            {
+                var respuesta = await DesSerializar<T>(response);
 
-        //        return new HttpRespuesta<T> (respuesta, false, response);
-        //    }
-        //    else
-        //    {
-        //        return new HttpRespuesta<T>(default, true, response);
-        //    }
-        //}
+                return new HttpRespuesta<T>(respuesta, false, response);
+            }
+            else
+            {
+                return new HttpRespuesta<T>(default, true, response);
+            }
+        }
 
         public async Task<HttpRespuesta<object>> Post<T>(string url, T entidad)
         {

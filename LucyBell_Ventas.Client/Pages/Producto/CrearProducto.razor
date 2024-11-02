@@ -4,13 +4,13 @@
 
 <h3>Agregar Producto</h3>
 
-<EditForm Model = "producto" OnInvalidSubmit="Guardar"> 
+<EditForm Model = "producto" OnInvalidSubmit="Guardar"/> 
 	<DataAnnotationsValidator />
 
 	<div class = "form-grup">
 		<label> Nombre </label>
 		<div>
-			<InputText class = "form-control" @brind-Value="@producto.Nombre" /> 
+			<InputText class = "form-control" @bind-Value="@producto.Nombre" /> 
 			<ValidationMessage For = "@(() => producto.Nombre)" /> 
 		</div>
 	</div>
@@ -18,7 +18,7 @@
 	<div class = "form-grup">
 		<label> Precio </label>
 		<div>
-			<InputText class = "form-control" @brind-Value="@producto.Precio" /> 
+			<InputNumber class = "form-control" @bind-Value="@producto.Precio" /> 
 			<ValidationMessage For = "@(() => producto.Precio)" /> 
 		</div>
 	</div>
@@ -26,7 +26,7 @@
 	<div class = "form-grup">
 		<label> Stock </label>
 		<div>
-			<InputText class = "form-control" @brind-Value="@producto.Stock" /> 
+			<InputNumber class = "form-control" @bind-Value="@producto.Stock" /> 
 			<ValidationMessage For = "@(() => producto.Stock)" /> 
 		</div>
 	</div>
@@ -35,7 +35,7 @@
 	<button class = "btn btn-success" type = "submit">Aceptar</button>
 	<button class = "btn btn-danger" @onclick = "Cancelar">Cancelar</button>
 
-</EditForm>
+<EditForm/>
 
 
 @code {

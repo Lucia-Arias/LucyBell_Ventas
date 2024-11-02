@@ -18,6 +18,12 @@ namespace LucyBell_Ventas.BD.Data.Entity
 
        [Range(0.01, double.MaxValue, ErrorMessage = "El precio debe ser mayor que cero.")]
        public decimal Precio { get; set; }
+
+       // Foreign Key
+       [Required(ErrorMessage = "El ID de la categoría es obligatorio")]
+       public int CategoriaId { get; set; }
+        
+       public Categoria Categoria { get; set; }
     }
 }
 

@@ -2,10 +2,52 @@
 @inject IHttpServicio http
 
 <h3>-PRODUCTOS-</h3>
+
+<table>
+
+	<tr>
+		<th>Nombre</th>
+		<th>Precio</th>
+		<th>Stock</th>
+	</tr>
+
+	@foreach (var item in ListaProductos)
+	{
+		<tr>
+
+			<td>@item.Nombre</td>
+			<td>@item.Precio</td>
+			<td>@item.Stock</td>
+
+		</tr>
+	}
+
+</table>
+
 <br />
 	<a class = "btn btn-primary" href = "/Api/Productos/agregar"><i class="bi bi-patch-plus"></i>  Agregar Producto</a> 
 <br />
 
 @code {
+    List<Producto> ListaProductos;
+    string Mensaje = "";
 
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        await Leer();
+    }
+
+    private async Task Leer()
+    {
+        var resp = await http.Get<List<Producto>>("Api/Productos");
+        if (!resp.Error)
+        {
+            ListaProductos = resp.Respuesta;
+        }
+        else
+        {
+            Mensaje = await resp.ObtenerError();
+        }
+    }
 }

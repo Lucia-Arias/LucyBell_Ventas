@@ -16,7 +16,12 @@ namespace LucyBell_Ventas.Server.Repositorio
             this.context = context;
         }
 
-        public async Task<int> Insert(E entidad)
+		public async Task<List<E>> Select()
+		{
+			return await context.Set<E>().ToListAsync();
+		}
+
+		public async Task<int> Insert(E entidad)
         {
             try
             {

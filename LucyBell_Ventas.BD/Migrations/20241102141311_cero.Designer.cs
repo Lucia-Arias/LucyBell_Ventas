@@ -11,18 +11,35 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LucyBell_Ventas.BD.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20240812150943_Primera")]
-    partial class Primera
+    [Migration("20241102141311_cero")]
+    partial class cero
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.7")
+                .HasAnnotation("ProductVersion", "8.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("LucyBell_Ventas.BD.Data.Entity.Categoria", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Nombre_Cat")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categorias");
+                });
 
             modelBuilder.Entity("LucyBell_Ventas.BD.Data.Entity.Producto", b =>
                 {
@@ -32,9 +49,13 @@ namespace LucyBell_Ventas.BD.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("CategoriaId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Nombre")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<decimal>("Precio")
                         .HasPrecision(18, 2)
@@ -45,7 +66,20 @@ namespace LucyBell_Ventas.BD.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("productos");
+                    b.HasIndex("CategoriaId");
+
+                    b.ToTable("Productos");
+                });
+
+            modelBuilder.Entity("LucyBell_Ventas.BD.Data.Entity.Producto", b =>
+                {
+                    b.HasOne("LucyBell_Ventas.BD.Data.Entity.Categoria", "Categoria")
+                        .WithMany()
+                        .HasForeignKey("CategoriaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Categoria");
                 });
 #pragma warning restore 612, 618
         }
