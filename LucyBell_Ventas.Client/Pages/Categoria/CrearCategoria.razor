@@ -1,0 +1,52 @@
+﻿@* @page "/Api/Categorias/agregar"
+@inject IHttpServicio http
+@inject NavigationManager navigationManager
+
+<h3> Agregar Categoria </h3>
+
+@if (!string.IsNullOrEmpty(mensajeError))
+{
+	<div class="alert alert-danger" role="alert">
+		@mensajeError
+	</div>
+}
+
+<EditForm Model="categoria" OnInvalidSubmit="Guardar" />
+<DataAnnotationsValidator />
+
+<div class="form-grup">
+	<label> Nombre Categoria </label>
+	<div>
+		<InputText class="form-control" @bind-Value="@categoria.Nombre_Cat" />
+		<ValidationMessage For="@(() => categoria.Nombre_Cat)" />
+	</div>
+</div>
+
+<br />
+<button class="btn btn-success" type="submit">Aceptar</button>
+<button class="btn btn-danger" @onclick="Cancelar">Cancelar</button>
+
+<EditForm />
+@code {
+	private Categoria categoria = new Categoria();
+
+	private string mensajeError;
+
+	private async Task Guardar()
+	{
+		var HttpRespuesta = await http.Post<Categoria>("Api/Categorias", categoria);
+		if (!HttpRespuesta.Error)
+		{
+			navigationManager.NavigateTo("/Api/Categoria");
+		}
+		else
+		{
+			mensajeError = "Error al guardar la categoria: " + await HttpRespuesta.HttpResponseMessage.Content.ReadAsStringAsync();
+		}
+	}
+
+	private void Cancelar()
+	{
+		navigationManager.NavigateTo("/Api/Categoria");
+	}
+} *@

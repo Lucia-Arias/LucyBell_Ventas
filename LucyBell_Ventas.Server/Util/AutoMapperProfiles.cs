@@ -9,6 +9,7 @@ namespace LucyBell_Ventas.Server.Util
         public AutoMapperProfiles()
         {
             CreateMap<CrearProductoDTO, Producto>();
+            CreateMap<CrearCategoriaDTO, Categoria>();
         }
     }
 }

@@ -20,6 +20,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddAutoMapper(typeof(Program));
 
 builder.Services.AddScoped<IProductoRepositorio, ProductoRepositorio>();
+builder.Services.AddScoped<ICategoriaRepositorio, CategoriaRepositorio>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

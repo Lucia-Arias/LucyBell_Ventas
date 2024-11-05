@@ -15,3 +15,26 @@
   </ItemGroup>
 
 </Project>
+
+
+<!--
+
+CREATE DATABASE LucyBell_Ventas;
+
+USE LucyBell_Ventas;
+
+CREATE TABLE categorias (
+Id INT PRIMARY KEY AUTO_INCREMENT,    
+Nombre_Cat VARCHAR(255) NOT NULL      
+);
+
+CREATE TABLE productos (
+Id INT PRIMARY KEY AUTO_INCREMENT,       
+Nombre VARCHAR(255) NOT NULL,            
+Stock INT NOT NULL,                      
+Precio DECIMAL(10, 2) NOT NULL,           
+CategoriaId INT,                         
+FOREIGN KEY (CategoriaId) REFERENCES categorias(Id)  
+);
+
+-->

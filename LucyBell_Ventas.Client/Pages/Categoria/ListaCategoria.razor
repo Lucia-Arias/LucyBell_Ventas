@@ -1,0 +1,62 @@
+﻿@* @page "/Api/Categorias"
+@inject IHttpServicio http
+
+<h3>-CATEGORIAS-</h3>
+
+@if (ListaCategorias != null && ListaCategorias.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col"> Categoria </th>
+            </tr>
+        </thead>
+        <tbody>
+
+          <tr>
+            <td>@item.Categoria.Nombre</td>   
+          </tr>
+            
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-warning" role="alert">
+        No hay categorias disponibles.
+    </div>
+}
+
+<a class="btn btn-primary" href="/Api/Categorias">
+    <i class="bi bi-plus-circle"></i> Agregar Categoria
+</a>
+
+@code {
+
+    public Categoria Categoria { get; set; }
+
+    List<Categoria> ListaCategorias;
+
+    string Mensaje = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        await Leer();
+    }
+
+    private async Task Leer()
+    {
+        var resp = await http.Get<List<Categoria>>("Api/Categorias");
+        if (!resp.Error)
+        {
+            ListaCategorias = resp.Respuesta;
+        }
+        else
+        {
+            Mensaje = await resp.ObtenerError();
+        }
+    }
+
+}
+ *@

@@ -2,13 +2,20 @@
 @inject IHttpServicio http
 @inject NavigationManager navigationManager
 
-<h3>Agregar Producto</h3>
+<h3> Agregar Producto </h3>
+
+@if (!string.IsNullOrEmpty(mensajeError))
+{
+    <div class="alert alert-danger" role="alert">
+        @mensajeError
+    </div>
+}
 
 <EditForm Model = "producto" OnInvalidSubmit="Guardar"/> 
 	<DataAnnotationsValidator />
 
 	<div class = "form-grup">
-		<label> Nombre </label>
+		<label> Nombre Producto </label>
 		<div>
 			<InputText class = "form-control" @bind-Value="@producto.Nombre" /> 
 			<ValidationMessage For = "@(() => producto.Nombre)" /> 
@@ -31,6 +38,20 @@
 		</div>
 	</div>
 
+<div class="form-group">
+	<label> Categoría </label>
+	<div>
+		<select class="form-control" @bind="producto.CategoriaId">
+			<option value="">Seleccione una categoría</option>
+			@foreach (var cat in categorias)
+			{
+				<option value="@cat.Id">@cat.Nombre_Cat</option>
+			}
+		</select>
+		<ValidationMessage For="@(() => producto.CategoriaId)" />
+	</div>
+</div>
+
 	<br/>
 	<button class = "btn btn-success" type = "submit">Aceptar</button>
 	<button class = "btn btn-danger" @onclick = "Cancelar">Cancelar</button>
@@ -40,18 +61,35 @@
 
 @code {
 	private Producto producto = new Producto();
+	private List<Categoria> categorias = new List<Categoria>();
+
+	private string mensajeError;
+
+	protected override async Task OnInitializedAsync()
+	{
+		await CargarCategorias();
+	}
+	
+	private async Task CargarCategorias()
+	{
+		var respuesta = await http.Get<List<Categoria>>("Api/Categorias");
+		if (!respuesta.Error)
+		{
+			categorias = respuesta.Respuesta;
+		}
+	}
 
 	private async Task Guardar()
 	{
 		var HttpRespuesta = await http.Post<Producto>("Api/Productos", producto);
-
-		if (HttpRespuesta.Error)
+		if (!HttpRespuesta.Error)
 		{
-			var body = HttpRespuesta.HttpResponseMessage;
+			navigationManager.NavigateTo("/Api/Productos");
 		}
-
-		//navigationManager.NavigateTo("/Api/Productos");
-
+		else
+		{
+			mensajeError = "Error al guardar el producto: " + await HttpRespuesta.HttpResponseMessage.Content.ReadAsStringAsync();
+		}
 	}
 
 	private void Cancelar()

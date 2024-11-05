@@ -3,39 +3,65 @@
 
 <h3>-PRODUCTOS-</h3>
 
-<table>
+@if (ListaProductos != null && ListaProductos.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col"> Nombre producto </th>
+                <th scope="col"> Precio </th>
+                <th scope="col"> Stock </th>
+                <th scope="col"> Categoría </th>
+@*                 <th scope="col">Acciones</th> *@
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in combinados)
+            {
+                <tr>
+                    <td>@item.Producto.Nombre</td>
+                    <td>@String.Format("${0:N2}", item.Producto.Precio)</td>
+                    <td>@item.Producto.Stock</td>
+                    <td>@item.Categoria.Nombre_Cat</td>
+@*                     <td>
+                       <a class="btn btn-warning btn-sm" href="/api/Productos/editar/@item.Producto.Id">Editar</a>
+                       <button class="btn btn-danger btn-sm" @onclick="() => Eliminar(item.Producto.Id)">Eliminar</button>
+                   </td> *@
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-warning" role="alert">
+        No hay productos disponibles.
+    </div>
+}
 
-	<tr>
-		<th>Nombre</th>
-		<th>Precio</th>
-		<th>Stock</th>
-	</tr>
-
-	@foreach (var item in ListaProductos)
-	{
-		<tr>
-
-			<td>@item.Nombre</td>
-			<td>@item.Precio</td>
-			<td>@item.Stock</td>
-
-		</tr>
-	}
-
-</table>
-
-<br />
-	<a class = "btn btn-primary" href = "/Api/Productos/agregar"><i class="bi bi-patch-plus"></i>  Agregar Producto</a> 
-<br />
-
+<a class="btn btn-primary" href="/Api/Productos/agregar">
+    <i class="bi bi-plus-circle"></i> Agregar Producto
+</a>
 @code {
+    public class ProductoConCategoria
+    {
+        public Producto Producto { get; set; }
+        public Categoria Categoria { get; set; }
+    }
+
     List<Producto> ListaProductos;
+    List<Categoria> ListaCategorias = new List<Categoria>();
+    List<ProductoConCategoria> combinados = new List<ProductoConCategoria>();
+
+
     string Mensaje = "";
 
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
         await Leer();
+        await LeerCategorias();
+        CrearCombinados();
     }
 
     private async Task Leer()
@@ -49,5 +75,25 @@
         {
             Mensaje = await resp.ObtenerError();
         }
+    }
+
+    private async Task LeerCategorias()
+    {
+        var resp = await http.Get<List<Categoria>>("Api/Categorias");
+        if (!resp.Error)
+        {
+            ListaCategorias = resp.Respuesta;
+        }
+    }
+
+    private void CrearCombinados()
+    {
+        combinados = (from p in ListaProductos
+                      join c in ListaCategorias on p.CategoriaId equals c.Id
+                      select new ProductoConCategoria
+                          {
+                              Producto = p,
+                              Categoria = c
+                          }).ToList();
     }
 }

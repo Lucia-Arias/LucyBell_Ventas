@@ -24,17 +24,22 @@ namespace LucyBell_Ventas.Server.Controllers
 		[HttpGet]
 		public async Task<ActionResult<List<Producto>>> Get()
 		{
-			return await repositorio.Select();
-		}
+            var productos = await repositorio.Select();
+            if (productos == null || !productos.Any())
+            {
+                return NotFound("No se encontraron productos.");
+            }
+            return Ok(productos);
+        }
 
 		[HttpPost]
-        public async Task<ActionResult<int>> Post(CrearProductoDTO entidadDTO)
+        public async Task<ActionResult<Producto>> Post(CrearProductoDTO entidadDTO)
         {
             try
             {
                 Producto entidad = mapper.Map<Producto>(entidadDTO);
-
-                return await repositorio.Insert(entidad);
+                var nuevoId = await repositorio.Insert(entidad);
+                return CreatedAtAction(nameof(Get), new { id = nuevoId }, entidad);
             }
             catch (Exception e)
             {
