@@ -3,10 +3,10 @@ using LucyBell_Ventas.BD.Data.Entity;
 
 namespace LucyBell_Ventas.Server.Repositorio
 {
-    public class ProductoRepositorio : Repositorio<Producto>, IProductoRepositorio
+    public class DetalleVentaRepositorio : Repositorio<DetalleVenta>, IDetalleVentaRepositorio
     {
         private readonly Context context;
-        public ProductoRepositorio(Context context) : base(context)
+        public DetalleVentaRepositorio(Context context) : base(context)
         {
             this.context = context;
         }

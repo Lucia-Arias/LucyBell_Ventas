@@ -21,6 +21,9 @@ builder.Services.AddAutoMapper(typeof(Program));
 
 builder.Services.AddScoped<IProductoRepositorio, ProductoRepositorio>();
 builder.Services.AddScoped<ICategoriaRepositorio, CategoriaRepositorio>();
+builder.Services.AddScoped<IVentaRepositorio, VentaRepositorio>();
+builder.Services.AddScoped<IDetalleVentaRepositorio, DetalleVentaRepositorio>();
+builder.Services.AddScoped<IMedioVentaRepositorio, MedioVentaRepositorio>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

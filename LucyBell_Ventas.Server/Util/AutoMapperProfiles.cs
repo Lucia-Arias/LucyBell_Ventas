@@ -10,6 +10,9 @@ namespace LucyBell_Ventas.Server.Util
         {
             CreateMap<CrearProductoDTO, Producto>();
             CreateMap<CrearCategoriaDTO, Categoria>();
+            CreateMap<CrearVentaDTO, Venta>();
+            CreateMap<CrearDetalleVentaDTO, DetalleVenta>();
+            CreateMap<CrearMedioVentaDTO, MedioVenta>();
         }
     }
 }

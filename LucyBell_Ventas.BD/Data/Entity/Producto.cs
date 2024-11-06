@@ -14,12 +14,13 @@ namespace LucyBell_Ventas.BD.Data.Entity
        public int Stock { get; set; }
 
        [Required(ErrorMessage = "El precio es obligatorio")]
-       [Range(0.01, double.MaxValue, ErrorMessage = "El precio debe ser mayor que cero.")]
-       public decimal Precio { get; set; }
+       [Range(1, int.MaxValue, ErrorMessage = "El precio debe ser mayor que cero.")]
+       public int Precio { get; set; }
 
-      //Foreign Key
-       [Required(ErrorMessage = "La categoría es obligatoria.")]
-       public int CategoriaId { get; set; }
+
+        //Foreign Key
+        [Required(ErrorMessage = "La categoría es obligatoria.")]
+        public int CategoriaId { get; set; }
 
         public Categoria Categoria { get; set; }
     }
