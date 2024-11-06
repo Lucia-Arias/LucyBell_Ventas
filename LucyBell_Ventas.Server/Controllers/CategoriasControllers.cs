@@ -41,5 +41,50 @@ namespace LucyBell_Ventas.Server.Controllers
                 return BadRequest(err.Message);
             }
         }
+
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult> Put(int id, [FromBody] Categoria entidad)
+        {
+            if (id != entidad.Id)
+            {
+                return BadRequest("Datos Incorrectos");
+            }
+            var a = await repositorio.SelectById(id);
+
+            if (a == null)
+            {
+                return NotFound("No existe la categoria.");
+            }
+
+            a.Nombre_Cat = entidad.Nombre_Cat;
+
+            try
+            {
+                await repositorio.Update(id, a);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var existe = await repositorio.Existe(id);
+            if (!existe)
+            {
+                return NotFound($"La categoria {id} no existe.");
+            }
+            if (await repositorio.Delete(id))
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
     }
 }

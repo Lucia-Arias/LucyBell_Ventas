@@ -2,7 +2,8 @@
 
 namespace LucyBell_Ventas.Server.Repositorio
 {
-    internal interface IMedioVentaRepositorio : IRepositorio<MedioVenta>
+    public interface IMedioVentaRepositorio : IRepositorio<MedioVenta>
     {
+
     }
 }

@@ -46,6 +46,52 @@ namespace LucyBell_Ventas.Server.Controllers
                 return BadRequest(e.Message);
             }
         }
+        
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult> Put(int id, [FromBody] Producto entidad)
+        {
+            if (id != entidad.Id)
+            {
+                return BadRequest("Datos Incorrectos");
+            }
+            var a = await repositorio.SelectById(id);
 
+            if (a == null)
+            {
+                return NotFound("No existe el producto.");
+            }
+
+            a.Nombre = entidad.Nombre;
+            a.Stock = entidad.Stock;
+            a.Precio = entidad.Precio;
+
+            try
+            {
+                await repositorio.Update(id, a);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var existe = await repositorio.Existe(id);
+            if (!existe)
+            {
+                return NotFound($"El producto {id} no existe.");
+            }
+            if (await repositorio.Delete(id))
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
     }
 }

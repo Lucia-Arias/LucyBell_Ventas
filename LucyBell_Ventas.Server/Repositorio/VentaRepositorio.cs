@@ -1,5 +1,6 @@
 ﻿using LucyBell_Ventas.BD.Data.Entity;
 using LucyBell_Ventas.BD.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace LucyBell_Ventas.Server.Repositorio
 {
