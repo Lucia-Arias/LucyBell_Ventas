@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LucyBell_Ventas.BD.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20241102141311_cero")]
-    partial class cero
+    [Migration("20241105124625_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

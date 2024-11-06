@@ -11,52 +11,52 @@
     </div>
 }
 
-<EditForm Model = "producto" OnInvalidSubmit="Guardar"/> 
+<EditForm Model="producto" OnValidSubmit="Guardar">
 	<DataAnnotationsValidator />
 
-	<div class = "form-grup">
-		<label> Nombre Producto </label>
+	<div class="form-group">
+		<label>Nombre Producto</label>
 		<div>
-			<InputText class = "form-control" @bind-Value="@producto.Nombre" /> 
-			<ValidationMessage For = "@(() => producto.Nombre)" /> 
+			<InputText class="form-control" @bind-Value="@producto.Nombre" /> 
+			<ValidationMessage For="@(() => producto.Nombre)" /> 
 		</div>
 	</div>
 
-	<div class = "form-grup">
-		<label> Precio </label>
+	<div class="form-group">
+		<label>Precio</label>
 		<div>
-			<InputNumber class = "form-control" @bind-Value="@producto.Precio" /> 
-			<ValidationMessage For = "@(() => producto.Precio)" /> 
+			<InputNumber class="form-control" @bind-Value="@producto.Precio" /> 
+			<ValidationMessage For="@(() => producto.Precio)" /> 
 		</div>
 	</div>
 
-	<div class = "form-grup">
-		<label> Stock </label>
+	<div class="form-group">
+		<label>Stock</label>
 		<div>
-			<InputNumber class = "form-control" @bind-Value="@producto.Stock" /> 
-			<ValidationMessage For = "@(() => producto.Stock)" /> 
+			<InputNumber class="form-control" @bind-Value="@producto.Stock" /> 
+			<ValidationMessage For="@(() => producto.Stock)" /> 
 		</div>
 	</div>
 
-<div class="form-group">
-	<label> Categoría </label>
-	<div>
-		<select class="form-control" @bind="producto.CategoriaId">
-			<option value="">Seleccione una categoría</option>
-			@foreach (var cat in categorias)
-			{
-				<option value="@cat.Id">@cat.Nombre_Cat</option>
-			}
-		</select>
-		<ValidationMessage For="@(() => producto.CategoriaId)" />
+	<div class="form-group">
+		<label>Categoría</label>
+		<div>
+			<select class="form-control" @bind="producto.CategoriaId">
+				<option value="">Seleccione una categoría</option>
+				@foreach (var cat in categorias)
+				{
+					<option value="@cat.Id">@cat.Nombre_Cat</option>
+				}
+			</select>
+			<ValidationMessage For="@(() => producto.CategoriaId)" />
+		</div>
 	</div>
-</div>
 
 	<br/>
-	<button class = "btn btn-success" type = "submit">Aceptar</button>
-	<button class = "btn btn-danger" @onclick = "Cancelar">Cancelar</button>
+	<button class="btn btn-success" type="submit">Aceptar</button>
+	<button class="btn btn-danger" @onclick="Cancelar">Cancelar</button>
+</EditForm>
 
-<EditForm/>
 
 
 @code {
