@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LucyBell_Ventas.BD.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20241106144032_ventaYDetalleYMedioVenta")]
-    partial class ventaYDetalleYMedioVenta
+    [Migration("20241107151323_A")]
+    partial class A
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,7 +51,6 @@ namespace LucyBell_Ventas.BD.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("Cantidad")
-                        .HasMaxLength(100)
                         .HasColumnType("int");
 
                     b.Property<int>("ProductoId")

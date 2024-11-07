@@ -61,11 +61,12 @@ else
         await base.OnInitializedAsync();
         await Leer();
         await LeerCategorias();
+        CrearCombinados();
 
-        if (ListaProductos != null && ListaCategorias != null && ListaProductos.Any() && ListaCategorias.Any())
-        {
-            CrearCombinados();
-        }
+        // if (ListaProductos != null && ListaCategorias != null && ListaProductos.Any() && ListaCategorias.Any())
+        // {
+        //     CrearCombinados();
+        // }
     }
 
 

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace LucyBell_Ventas.BD.Migrations
 {
     /// <inheritdoc />
-    public partial class ventaYDetalleYMedioVenta : Migration
+    public partial class A : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -86,7 +86,7 @@ namespace LucyBell_Ventas.BD.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Cantidad = table.Column<int>(type: "int", maxLength: 100, nullable: false),
+                    Cantidad = table.Column<int>(type: "int", nullable: false),
                     Subtotal = table.Column<int>(type: "int", nullable: false),
                     VentaId = table.Column<int>(type: "int", nullable: false),
                     ProductoId = table.Column<int>(type: "int", nullable: false)
