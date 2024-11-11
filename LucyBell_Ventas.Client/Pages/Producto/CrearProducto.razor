@@ -15,6 +15,20 @@
 	<DataAnnotationsValidator />
 
 	<div class="form-group">
+		<label>Categoría</label>
+		<div>
+			<select class="form-control" @bind="producto.CategoriaId">
+				<option value="">Seleccione una categoría</option>
+				@foreach (var cat in categorias)
+				{
+					<option value="@cat.Id">@cat.Nombre_Cat</option>
+				}
+			</select>
+			<ValidationMessage For="@(() => producto.CategoriaId)" />
+		</div>
+	</div>
+	
+	<div class="form-group">
 		<label>Nombre Producto</label>
 		<div>
 			<InputText class="form-control" @bind-Value="@producto.Nombre" /> 
@@ -35,20 +49,6 @@
 		<div>
 			<InputNumber class="form-control" @bind-Value="@producto.Stock" /> 
 			<ValidationMessage For="@(() => producto.Stock)" /> 
-		</div>
-	</div>
-
-	<div class="form-group">
-		<label>Categoría</label>
-		<div>
-			<select class="form-control" @bind="producto.CategoriaId">
-				<option value="">Seleccione una categoría</option>
-				@foreach (var cat in categorias)
-				{
-					<option value="@cat.Id">@cat.Nombre_Cat</option>
-				}
-			</select>
-			<ValidationMessage For="@(() => producto.CategoriaId)" />
 		</div>
 	</div>
 
