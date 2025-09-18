@@ -1,4 +1,5 @@
 ﻿using LucyBell_Ventas.BD.Data.Entity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace LucyBell_Ventas.BD.Data
 {
-    public class Context : DbContext
+    public class Context : IdentityDbContext
     {
         public DbSet<Producto> Productos { get; set; }
         public DbSet<Categoria> Categorias { get; set; }

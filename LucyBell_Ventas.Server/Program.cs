@@ -2,10 +2,16 @@ using Microsoft.EntityFrameworkCore;
 using LucyBell_Ventas.BD.Data;
 using System.Text.Json.Serialization;
 using LucyBell_Ventas.Server.Repositorio;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddOutputCache(options =>
+{
+    options.DefaultExpirationTimeSpan = TimeSpan.FromSeconds(60);
+}
+);
 
 builder.Services.AddControllers().AddJsonOptions(
     x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles); ;
@@ -16,6 +22,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<Context>(op => op.UseSqlServer("name=conn"));
 builder.Services.AddRazorPages();
 
+builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+    .AddEntityFrameworkStores<Context>()
+    .AddDefaultTokenProviders();
 
 builder.Services.AddAutoMapper(typeof(Program));
 
@@ -39,9 +48,10 @@ app.UseStaticFiles();
 app.UseRouting();
 app.MapRazorPages();
 
-
+app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseOutputCache();
 app.MapControllers();
 
 app.MapFallbackToFile("index.html");

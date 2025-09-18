@@ -5,6 +5,8 @@ using LucyBell_Ventas.BD.Data.Entity;
 using LucyBell_Ventas.Shared.DTO;
 using AutoMapper;
 using LucyBell_Ventas.Server.Repositorio;
+using System.Runtime.InteropServices;
+using Microsoft.AspNetCore.OutputCaching;
 
 namespace LucyBell_Ventas.Server.Controllers
 {
@@ -14,14 +16,19 @@ namespace LucyBell_Ventas.Server.Controllers
     {
         private readonly IProductoRepositorio repositorio;
         private readonly IMapper mapper;
+        private readonly IOutputCacheStore outputCacheStore;
 
-        public ProductosControllers(IProductoRepositorio repositorio,IMapper mapper)
+        private const string cacheKey = "Productos";
+
+        public ProductosControllers(IProductoRepositorio repositorio,IMapper mapper, IOutputCacheStore outputCacheStore)
         {
             this.repositorio = repositorio;
             this.mapper = mapper;
+            this.outputCacheStore = outputCacheStore;
         }
 
 		[HttpGet]
+  [OutputCache(Tags = [cacheKey])]
 		public async Task<ActionResult<List<Producto>>> Get()
 		{
             var productos = await repositorio.Select();
@@ -39,6 +46,9 @@ namespace LucyBell_Ventas.Server.Controllers
             {
                 Producto entidad = mapper.Map<Producto>(entidadDTO);
                 var nuevoId = await repositorio.Insert(entidad);
+
+                await outputCacheStore.EvictByTagAsync(cacheKey, default);
+
                 return CreatedAtAction(nameof(Get), new { id = nuevoId }, entidad);
             }
             catch (Exception e)
@@ -68,6 +78,7 @@ namespace LucyBell_Ventas.Server.Controllers
             try
             {
                 await repositorio.Update(id, a);
+                await outputCacheStore.EvictByTagAsync(cacheKey, default);
                 return Ok();
             }
             catch (Exception e)
@@ -86,6 +97,7 @@ namespace LucyBell_Ventas.Server.Controllers
             }
             if (await repositorio.Delete(id))
             {
+                await outputCacheStore.EvictByTagAsync(cacheKey, default);
                 return Ok();
             }
             else
