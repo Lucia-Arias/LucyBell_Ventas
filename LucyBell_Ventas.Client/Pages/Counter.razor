@@ -1,4 +1,5 @@
 ﻿@page "/counter"
+@inject IJSRuntime js
 @using Microsoft.AspNetCore.Authorization
 @attribute [Authorize(Roles = "admin")]
 
@@ -13,8 +14,18 @@
 @code {
     private int currentCount = 0;
 
-    private void IncrementCount()
+    private async Task IncrementCount()
     {
-        currentCount++;
+        var confirmado = await js.Confirmar($"¿Desea incrementar?");
+        if(confirmado)
+        {
+            currentCount++;
+        }
+        else
+        {
+            currentCount--;
+
+        }
+
     }
 }

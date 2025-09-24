@@ -13,6 +13,11 @@ builder.Services.AddSingleton(sp => new HttpClient { BaseAddress = new Uri(build
 builder.Services.AddAuthorizationCore();
 
 builder.Services.AddScoped<IHttpServicio, HttpServicio>();
-builder.Services.AddScoped<AuthenticationStateProvider, ProveedorAutenticacion>();
+
+builder.Services.AddScoped<ProveedorAutenticacionJWT>();
+builder.Services.AddScoped<AuthenticationStateProvider, ProveedorAutenticacionJWT>(proveedor =>
+    proveedor.GetRequiredService<ProveedorAutenticacionJWT>());
+builder.Services.AddScoped<ILoginService, ProveedorAutenticacionJWT>(proveedor =>
+    proveedor.GetRequiredService<ProveedorAutenticacionJWT>());
 
 await builder.Build().RunAsync();

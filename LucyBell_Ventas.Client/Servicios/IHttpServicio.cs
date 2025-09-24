@@ -3,6 +3,6 @@
     public interface IHttpServicio
     {
         Task<HttpRespuesta<T>> Get<T>(string url);
-        Task<HttpRespuesta<object>> Post<T>(string url, T entidad);
+        Task<HttpRespuesta<TResp>> Post<T, TResp>(string url, T entidad);
     }
 }

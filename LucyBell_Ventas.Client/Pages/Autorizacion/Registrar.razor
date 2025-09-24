@@ -1,0 +1,52 @@
+﻿@page "/registrar"
+@using LucyBell_Ventas.Shared.DTO
+@using LucyBell_Ventas.Client.Autorizacion
+@inject IHttpServicio http
+@inject NavigationManager navigationManager
+@inject IJSRuntime js
+@inject ILoginService LoginService
+<h3>Registrar</h3>
+
+<EditForm Model="userInfo" OnValidSubmit="CrearUsuario">
+    <DataAnnotationsValidator />
+
+    <div class="mb-3">
+        <label for="email" class="form-label">Email:</label>
+        <InputText id="email" class="form-control" @bind-Value="userInfo.Email" />
+        <ValidationMessage For="@(() => userInfo.Email)" />
+    </div>
+    <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <InputText id="password" type="password" class="form-control" @bind-Value="userInfo.Password" />
+        <ValidationMessage For="@(() => userInfo.Password)" />
+    </div>
+    <button type="submit" class="btn btn-primary">Registrar</button>
+</EditForm>
+
+@code {
+    private UserInfoDTO userInfo = new UserInfoDTO();
+
+    private async Task CrearUsuario()
+    {
+        var httpRespuesta = await http.Post<UserInfoDTO, UserTokenDTO>("api/user/registrar", userInfo);
+        if (httpRespuesta.Error)
+        {
+            var msg = await httpRespuesta.ObtenerError();
+            await js.Confirmar(msg);
+        }
+        else
+        {
+            var userToken = httpRespuesta.Respuesta as UserTokenDTO;
+            if (userToken != null)
+            {
+                await LoginService.Login(userToken);
+                navigationManager.NavigateTo("/");
+            }
+            else
+            {
+                await js.Confirmar("No se pudo obtener el Token.");
+            }
+        }
+    }
+
+}

@@ -20,7 +20,7 @@ namespace LucyBell_Ventas.Client.Autorizacion
                 authenticationType:"ok"
                 );
 
-            return await Task.FromResult(new AuthenticationState(new ClaimsPrincipal(usuarioPipi)));
+            return await Task.FromResult(new AuthenticationState(new ClaimsPrincipal(anonimo)));
         }
     }
 }

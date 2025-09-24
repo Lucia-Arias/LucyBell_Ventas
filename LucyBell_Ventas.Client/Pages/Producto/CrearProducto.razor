@@ -1,4 +1,5 @@
 ﻿@page "/Api/Productos/agregar" 
+@using LucyBell_Ventas.Shared.DTO
 @inject IHttpServicio http
 @inject NavigationManager navigationManager
 
@@ -60,7 +61,7 @@
 
 
 @code {
-	private Producto producto = new Producto();
+	private CrearProductoDTO producto = new CrearProductoDTO();
 	private List<Categoria> categorias = new List<Categoria>();
 
 	private string mensajeError;
@@ -81,7 +82,7 @@
 
 	private async Task Guardar()
 	{
-		var HttpRespuesta = await http.Post<Producto>("Api/Productos", producto);
+		var HttpRespuesta = await http.Post<CrearProductoDTO, int>("Api/Productos", producto);
 		if (!HttpRespuesta.Error)
 		{
 			navigationManager.NavigateTo("/Api/Productos");

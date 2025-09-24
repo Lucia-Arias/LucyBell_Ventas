@@ -40,7 +40,7 @@ namespace LucyBell_Ventas.Server.Controllers
         }
 
 		[HttpPost]
-        public async Task<ActionResult<Producto>> Post(CrearProductoDTO entidadDTO)
+        public async Task<ActionResult<int>> Post(CrearProductoDTO entidadDTO)
         {
             try
             {
@@ -49,7 +49,7 @@ namespace LucyBell_Ventas.Server.Controllers
 
                 await outputCacheStore.EvictByTagAsync(cacheKey, default);
 
-                return CreatedAtAction(nameof(Get), new { id = nuevoId }, entidad);
+                return nuevoId;
             }
             catch (Exception e)
             {
